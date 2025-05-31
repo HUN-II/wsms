@@ -141,7 +141,7 @@ function TotalScorePage() {
   // 메인화면 이동
   const handleMainPage = () => {
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
-    navigate('/');
+    navigate('/main');
   };
   // 반 이름에 따른 점수 반환
   const getScore = (className: string, month: number) => {
@@ -344,7 +344,7 @@ function TotalScorePage() {
           <Button 
             variant="contained" 
             startIcon={<ArrowBackIcon />} 
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/main')}
             sx={{ backgroundColor: '#333333', color: '#ffffff', '&:hover': { backgroundColor: '#444444' } }}
           >
             메인화면

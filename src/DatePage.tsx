@@ -181,7 +181,7 @@ function calcSum(row: ScoreRowData, scoreSettings: { label: string; value: strin
 
 function DatePage(props: DatePageProps) {
   const params = useParams();
-  const date = props.date ?? params.dateStr;
+  const date = props.date ?? params.date;
   const navigate = useNavigate();
   const [tabValue, setTabValue] = useState(0);
 
@@ -629,7 +629,14 @@ function DatePage(props: DatePageProps) {
       // 전 주 점수 설정 불러오기
       const prevScoreSettings = localStorage.getItem(`scoreSettings_${prevDate}`);
       if (prevScoreSettings) {
-        setScoreSettings(JSON.parse(prevScoreSettings));
+        const settings = JSON.parse(prevScoreSettings);
+        // 출석 점수 설정 찾기
+        const attendSetting = settings.find((setting: any) => setting.label === '출석');
+        if (attendSetting) {
+          setScoreAttendanceValue(attendSetting.value);
+        }
+        // 나머지 점수 설정 불러오기
+        setScoreSettings(settings.filter((setting: any) => setting.label !== '출석'));
       }
 
       // --- 출석 집계 복사 ---
@@ -787,7 +794,7 @@ function DatePage(props: DatePageProps) {
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
     }
-    window.location.href = '/';
+    window.location.href = '/main';
   };
 
   // 전 주 명단 전체 불러오기 핸들러 (출석 집계 전체)
@@ -803,7 +810,14 @@ function DatePage(props: DatePageProps) {
     // 전 주 점수 설정 불러오기
     const prevScoreSettings = localStorage.getItem(`scoreSettings_${prevDate}`);
     if (prevScoreSettings) {
-      setScoreSettings(JSON.parse(prevScoreSettings));
+      const settings = JSON.parse(prevScoreSettings);
+      // 출석 점수 설정 찾기
+      const attendSetting = settings.find((setting: any) => setting.label === '출석');
+      if (attendSetting) {
+        setScoreAttendanceValue(attendSetting.value);
+      }
+      // 나머지 점수 설정 불러오기
+      setScoreSettings(settings.filter((setting: any) => setting.label !== '출석'));
     }
 
     // 전 주 출석 집계 불러오기

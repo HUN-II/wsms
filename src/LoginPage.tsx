@@ -12,7 +12,7 @@ const LoginPage: React.FC = () => {
     // 임시 로그인 로직 (실제로는 서버와 통신해야 함)
     if (username === 'wsms' && password === 'tjrlqn1@') {
       localStorage.setItem('isLoggedIn', 'true');
-      navigate('/');
+      navigate('/main');
     } else {
       alert('아이디 또는 비밀번호가 올바르지 않습니다.');
     }

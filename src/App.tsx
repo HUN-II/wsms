@@ -228,11 +228,6 @@ function MainPage() {
       navigate(`/total-score/${selectedYear}`);
     }
   };
-  // 메인화면 이동
-  const handleMainPage = () => {
-    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
-    navigate('/');
-  };
   // 연도 선택 핸들러
   const handleYearChange = (event: SelectChangeEvent) => setSelectedYear(event.target.value);
 
@@ -306,7 +301,7 @@ function MainPage() {
                 <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
                   {createdDates.map(date => (
                     <Box component="li" key={date} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 1, borderBottom: '1px solid #eee' }}>
-                      <Typography>{date}</Typography>
+                      <Typography>{date} 집계</Typography>
                       <IconButton color="error" onClick={() => handleDeleteDate(date)}>
                         <DeleteIcon />
                       </IconButton>
@@ -410,13 +405,13 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/" element={
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/main" element={
             <PrivateRoute>
               <MainPage />
             </PrivateRoute>
           } />
-          <Route path="/date/:dateStr" element={
+          <Route path="/date/:date" element={
             <PrivateRoute>
               <DatePage />
             </PrivateRoute>

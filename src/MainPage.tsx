@@ -17,6 +17,7 @@ import {
 
 const MainPage: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const [totalScoreOpen, setTotalScoreOpen] = useState(false);
   const [selectedYear, setSelectedYear] = useState<string>('');
   const [selectedMonth, setSelectedMonth] = useState<string>('');
   const [selectedDay, setSelectedDay] = useState<string>('');
@@ -41,6 +42,14 @@ const MainPage: React.FC = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleTotalScoreClick = () => {
+    setTotalScoreOpen(true);
+  };
+
+  const handleTotalScoreClose = () => {
+    setTotalScoreOpen(false);
   };
 
   const handleYearChange = (event: SelectChangeEvent) => {
@@ -70,11 +79,11 @@ const MainPage: React.FC = () => {
     }
   };
 
-  const handleTotalScore = () => {
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
+  const handleTotalScoreConfirm = () => {
+    if (selectedYear) {
+      setTotalScoreOpen(false);
+      window.location.href = `/total-score/${selectedYear}`;
     }
-    window.location.href = '/total-score';
   };
 
   return (
@@ -89,7 +98,7 @@ const MainPage: React.FC = () => {
         </Button>
         <Button
           variant="contained"
-          onClick={handleTotalScore}
+          onClick={handleTotalScoreClick}
           sx={{ minWidth: 200 }}
         >
           총점수
@@ -150,6 +159,32 @@ const MainPage: React.FC = () => {
         <DialogActions>
           <Button onClick={handleClose}>취소</Button>
           <Button onClick={handleConfirm} variant="contained">
+            확인
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={totalScoreOpen} onClose={handleTotalScoreClose}>
+        <DialogTitle>연도 선택</DialogTitle>
+        <DialogContent>
+          <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+            <FormControl>
+              <InputLabel>연도</InputLabel>
+              <Select
+                value={selectedYear}
+                label="연도"
+                onChange={(e) => setSelectedYear(e.target.value)}
+              >
+                {years.map((year) => (
+                  <MenuItem key={year} value={year}>{year}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleTotalScoreClose}>취소</Button>
+          <Button onClick={handleTotalScoreConfirm} variant="contained">
             확인
           </Button>
         </DialogActions>
