@@ -15,7 +15,6 @@ import {
   FormControl,
   Select,
   MenuItem,
-  InputLabel,
   Alert,
   ThemeProvider,
   createTheme
@@ -26,7 +25,6 @@ import DatePage from './DatePage';
 import DefaultPage from './DefaultPage';
 import TotalScorePage from './TotalScorePage';
 import { SelectChangeEvent } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LoginPage from './LoginPage';
 
 // 모노톤 테마 생성

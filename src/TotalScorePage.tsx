@@ -18,11 +18,6 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-interface ClassData {
-  name: string;
-  teacher: string;
-}
-
 interface ScoreData {
   [key: string]: {
     [className: string]: number;

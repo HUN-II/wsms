@@ -239,7 +239,6 @@ function DatePage(props: DatePageProps) {
     + visitorTables.reduce((sum, table) => sum + table.rows.reduce((s, row) => s + row.students.filter((name, idx) => name.trim() !== '' && (row.attends ?? Array(10).fill(false))[idx]).length, 0), 0);
 
   // 학생 테이블용 상태
-  const [studentEdit, setStudentEdit] = useState(false);
   const [studentTotal, setStudentTotal] = useState(() => localStorage.getItem('studentTotal') || '');
   const [studentAttend, setStudentAttend] = useState(() => localStorage.getItem('studentAttend') || '');
   useEffect(() => {
